@@ -1,19 +1,18 @@
 package com.example.mycity.data
 
 import com.example.mycity.R
-import com.example.mycity.model.CComercial
 import com.example.mycity.model.Recommendation
 
 object RecommendationDataProvider {
-    val defaultRecommendation = getRecommendationData()[0]
+    val defaultRecommendation = getRecommendationData(R.string.CComerciales)[0]
 
-    fun getRecommendationData(): List<Recommendation> {
+    fun getRecommendationData(activity: Int): List<Recommendation> {
         val cComercialList = listOf(
             Recommendation(
                 id = 1,
                 titleResourceId = R.string.laGavia,
                 detailsId = R.string.loremIpsum,
-                imageResourceId = R.drawable.lagavia
+                imageResourceId = R.drawable.laGavia
             ),
             Recommendation(
                 id = 2,
@@ -98,9 +97,55 @@ object RecommendationDataProvider {
                 titleResourceId = R.string.cafeTe,
                 detailsId = R.string.loremIpsum,
                 imageResourceId = R.drawable.te
+            ),
+            Recommendation(
+                id = 5,
+                titleResourceId = R.string.timHorton,
+                detailsId = R.string.loremIpsum,
+                imageResourceId = R.drawable.timhortons
             )
         )
 
-        return cComercialList
+        val restauranteList = listOf(
+            Recommendation(
+                id = 1,
+                titleResourceId = R.string.burguerKing,
+                detailsId = R.string.loremIpsum,
+                imageResourceId = R.drawable.burguer
+            ),
+            Recommendation(
+                id = 2,
+                titleResourceId = R.string.mcDonalds,
+                detailsId = R.string.loremIpsum,
+                imageResourceId = R.drawable.mcdondald
+            ),
+            Recommendation(
+                id = 3,
+                titleResourceId = R.string.goiko,
+                detailsId = R.string.loremIpsum,
+                imageResourceId = R.drawable.goiko
+            ),
+            Recommendation(
+                id = 4,
+                titleResourceId = R.string.tagliatella,
+                detailsId = R.string.loremIpsum,
+                imageResourceId = R.drawable.tagliatella
+            ),
+            Recommendation(
+                id = 5,
+                titleResourceId = R.string.shifuRamen,
+                detailsId = R.string.loremIpsum,
+                imageResourceId = R.drawable.shifuramen
+            )
+        )
+
+        when(activity) {
+            R.string.CComerciales -> return cComercialList
+            R.string.Parques -> return parquesList
+            R.string.Cafeterias -> return cafeteriaList
+            R.string.Restaurantes -> return restauranteList
+
+            else -> return cComercialList
+        }
     }
 }
