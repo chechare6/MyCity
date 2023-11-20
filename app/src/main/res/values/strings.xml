@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">MyCity</string>
     <string name="mycity">My City App</string>
+    <string name="loremIpsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non quam condimentum, euismod odio quis, eleifend urna. Phasellus neque odio, dictum at enim ac, mattis finibus mauris. Etiam nec cursus nisl, id iaculis tellus. Aliquam vestibulum tellus eu faucibus pellentesque. Suspendisse cursus efficitur risus vitae suscipit. Sed libero mi, dignissim vel leo ut, convallis ornare lacus. Curabitur purus nibh, venenatis ac vestibulum eget, blandit et tellus. Donec ipsum nunc, sagittis sit amet dui ac, ultrices consectetur lectus. Aliquam eleifend risus lacus, nec rhoncus nisl sollicitudin quis.</string>
     <!-- ACTIVIDADES -->
     <string name="CComerciales">Centros Comerciales</string>
     <string name="Parques">Parques</string>
