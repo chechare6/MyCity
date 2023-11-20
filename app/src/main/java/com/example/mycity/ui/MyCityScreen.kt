@@ -1,21 +1,13 @@
 package com.example.mycity.ui
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -26,15 +18,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.collectAsState
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.example.mycity.R
-import com.example.mycity.model.Activities
 import com.example.mycity.utils.MyCityContentType
 
 enum class MyCityScreens(@StringRes val title: Int) {
@@ -42,26 +35,43 @@ enum class MyCityScreens(@StringRes val title: Int) {
     Recommendations (title = R.string.recommendations),
     Details (title = R.string.details)
 }
-
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyCityApp(
     windowSize: WindowWidthSizeClass
 ) {
     val viewModel: MyCityViewModel = viewModel()
-    /* ESTO ES NECESARIO, HAY QUE IMPORTAR BIEN NAVCONTROLLER
+
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = MyCityScreens.valueOf(
         backStackEntry?.destination?.route?:MyCityScreens.Activities.name
     )
-    */
     val contentType = when (windowSize) {
         WindowWidthSizeClass.Compact,
         WindowWidthSizeClass.Medium -> MyCityContentType.ListOnly
         WindowWidthSizeClass.Expanded -> MyCityContentType.ListAndDetails
         else -> MyCityContentType.ListOnly
     }
-    /* TODO */
+    
+    Scaffold (
+        topBar = {
+            MyCityApp(
+                currentScreen = /* TODO() */,
+                canGoBack = navController.previousBackStackEntry != null,
+                navigateNext = {navController.navigateUp()}
+            )
+        }
+    ) { innerPadding ->
+        val uiStateActivities by viewModel.uiActivitiesState.collectAsState()
+        val uiStateRecomendation by viewModel.uiRecommendationState.collectAsState()
+
+        if(contentType == MyCityContenType.ListsAndDetail){
+            MyCityListAndDetail(uiStateCategorias, uiStateRecomendaciones, viewModel, innerPadding, modifier = Modifier.fillMaxWidth())
+
+        }
+
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
