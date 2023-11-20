@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">MyCity</string>
     <string name="laGavia">La Gavia</string>
+    <string name="mycity">My City App</string>
+    <string name="CComerciales">Centros Comerciales</string>
+    <string name="Parques">Parques</string>
+    <string name="Cafeterias">Cafeterías</string>
+    <string name="Restaurantes">Restaurantes</string>
 </resources>
