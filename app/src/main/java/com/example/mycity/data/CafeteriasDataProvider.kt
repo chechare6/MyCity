@@ -10,8 +10,28 @@ object CafeteriasDataProvider {
         return listOf(
             Cafeteria(
                 id = 1,
-                titleResourceId = R.string.laGavia,
-                imageResourceId = R.drawable.laGavia,
+                titleResourceId = R.string.starbucks,
+                imageResourceId = R.drawable.starbucks
+            ),
+            Cafeteria(
+                id = 2,
+                titleResourceId = R.string.rodilla,
+                imageResourceId = R.drawable.rodilla
+            ),
+            Cafeteria(
+                id = 3,
+                titleResourceId = R.string.costaCoffe,
+                imageResourceId = R.drawable.costacoffe
+            ),
+            Cafeteria(
+                id = 4,
+                titleResourceId = R.string.cafeTe,
+                imageResourceId = R.drawable.te
+            ),
+            Cafeteria(
+                id = 5,
+                titleResourceId = R.string.timHorton,
+                imageResourceId = R.drawable.timhortons
             )
         )
     }

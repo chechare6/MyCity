@@ -18,12 +18,15 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
@@ -32,16 +35,41 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mycity.R
+import com.example.mycity.data.ActivitiesDataProvider
 import com.example.mycity.model.Activities
+import com.example.mycity.ui.theme.MyCityTheme
+import com.example.mycity.utils.MyCityContentType
 
 
 @Composable
 fun MyCityApp(
-    windowSize: WindowWidthSizeClass
+    windowSize: WindowWidthSizeClass,
+    onBackPressed: () -> Unit
 ) {
-    
+    val viewModel: MyCityViewModel = viewModel()
+    val activityUiState by viewModel.uiActivitiesState.collectAsState()
+    val contentType = when (windowSize) {
+        WindowWidthSizeClass.Compact,
+        WindowWidthSizeClass.Medium -> MyCityContentType.ListOnly
+        WindowWidthSizeClass.Expanded -> MyCityContentType.ListAndDetails
+        else -> MyCityContentType.ListOnly
+    }
+    Scaffold (
+        topBar = {
+            MyCityAppBar(windowSize = windowSize)
+        }
+    ) {innerPadding ->
+        ActivityList(
+            activity = activityUiState.activitiesList,
+            onCLick = {},
+            modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.padding_medium)),
+            contentPadding = innerPadding
+        )
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -66,7 +94,7 @@ fun MyCityAppBar(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun MyCityListItem(
+private fun ActivityListItem(
     activity: Activities,
     onItemClick: (Activities) -> Unit,
     modifier: Modifier = Modifier
@@ -132,10 +160,23 @@ private fun ActivityList(
         modifier = modifier.padding(top = dimensionResource(R.dimen.padding_medium)),
     ) {
         items(activity, key = { activity -> activity.id }) {activity ->
-            MyCityListItem(
+            ActivityListItem    (
                 activity = activity,
                 onItemClick = onCLick
             )
+        }
+    }
+}
+
+
+@Preview
+@Composable
+fun ActivitiesListPreview() {
+    MyCityTheme {
+        Surface {
+            ActivityList(
+                activity = ActivitiesDataProvider.getActivityData(),
+                onCLick = {} )
         }
     }
 }

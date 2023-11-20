@@ -10,8 +10,28 @@ object RestauranteDataProvider {
                 return listOf(
                     Restaurante(
                         id = 1,
-                        titleResourceId = R.string.laGavia,
-                        imageResourceId = R.drawable.laGavia,
+                        titleResourceId = R.string.burguerKing,
+                        imageResourceId = R.drawable.burguer
+                    ),
+                    Restaurante(
+                        id = 2,
+                        titleResourceId = R.string.mcDonalds,
+                        imageResourceId = R.drawable.mcdondald
+                    ),
+                    Restaurante(
+                        id = 3,
+                        titleResourceId = R.string.goiko,
+                        imageResourceId = R.drawable.goiko
+,                   ),
+                    Restaurante(
+                        id = 4,
+                        titleResourceId = R.string.tagliatella,
+                        imageResourceId = R.drawable.tagliatella
+                    ),
+                    Restaurante(
+                        id = 5,
+                        titleResourceId = R.string.shifuRamen,
+                        imageResourceId = R.drawable.shifuramen
                     )
                 )
             }

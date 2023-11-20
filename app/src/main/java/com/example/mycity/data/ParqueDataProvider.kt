@@ -11,8 +11,28 @@ object ParqueDataProvider {
             return listOf(
                 Parque(
                     id = 1,
-                    titleResourceId = R.string.laGavia,
-                    imageResourceId = R.drawable.laGavia,
+                    titleResourceId = R.string.retiro,
+                    imageResourceId = R.drawable.retiro
+                ),
+                Parque(
+                    id = 2,
+                    titleResourceId = R.string.jcPrimero,
+                    imageResourceId = R.drawable.jcprimero
+                ),
+                Parque(
+                    id = 3,
+                    titleResourceId = R.string.dehesaVilla,
+                    imageResourceId = R.drawable.dehesavilla
+                ),
+                Parque(
+                    id = 4,
+                    titleResourceId = R.string.delOeste,
+                    imageResourceId = R.drawable.deloeste
+                ),
+                Parque(
+                    id = 5,
+                    titleResourceId = R.string.deAustria,
+                    imageResourceId = R.drawable.mariaaustria
                 )
             )
     }

@@ -1,9 +1,33 @@
 <resources>
     <string name="app_name">MyCity</string>
-    <string name="laGavia">La Gavia</string>
     <string name="mycity">My City App</string>
+    <!-- ACTIVIDADES -->
     <string name="CComerciales">Centros Comerciales</string>
     <string name="Parques">Parques</string>
     <string name="Cafeterias">Cafeterías</string>
     <string name="Restaurantes">Restaurantes</string>
+    <!-- CENTROS COMERCIALES -->
+    <string name="laGavia">La Gavia</string>
+    <string name="laVaguada">La Vaguada</string>
+    <string name="h2ocio">H2Ocio</string>
+    <string name="pPio">Principe Pío</string>
+    <string name="plenilunio">Plenilunio</string>
+    <!-- PARQUES -->
+    <string name="retiro">El Retiro</string>
+    <string name="jcPrimero">Juan Carlos I</string>
+    <string name="dehesaVilla">La Dehesa de la Villa</string>
+    <string name="delOeste">Parque del Oeste</string>
+    <string name="deAustria">María de Austria</string>
+    <!-- RESTAURANTES -->
+    <string name="burguerKing">Burguer King</string>
+    <string name="mcDonalds">McDonalds</string>
+    <string name="goiko">Goiko</string>
+    <string name="tagliatella">Tagliatella</string>
+    <string name="shifuRamen">Ramen Shifu</string>
+    <!-- CAFETERÍAS -->
+    <string name="starbucks">Starbucks</string>
+    <string name="rodilla">Rodilla</string>
+    <string name="costaCoffe">Costa Coffe</string>
+    <string name="cafeTe">Café &amp; Té</string>
+    <string name="timHorton">Tim Hortons</string>
 </resources>
