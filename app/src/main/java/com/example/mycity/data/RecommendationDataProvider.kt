@@ -12,7 +12,7 @@ object RecommendationDataProvider {
                 id = 1,
                 titleResourceId = R.string.laGavia,
                 detailsId = R.string.loremIpsum,
-                imageResourceId = R.drawable.laGavia
+                imageResourceId = R.drawable.lagavia
             ),
             Recommendation(
                 id = 2,
@@ -139,13 +139,13 @@ object RecommendationDataProvider {
             )
         )
 
-        when(activity) {
-            R.string.CComerciales -> return cComercialList
-            R.string.Parques -> return parquesList
-            R.string.Cafeterias -> return cafeteriaList
-            R.string.Restaurantes -> return restauranteList
+        return when(activity) {
+            R.string.CComerciales -> cComercialList
+            R.string.Parques -> parquesList
+            R.string.Cafeterias -> cafeteriaList
+            R.string.Restaurantes -> restauranteList
 
-            else -> return cComercialList
+            else -> cComercialList
         }
     }
 }

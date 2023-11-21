@@ -3,6 +3,7 @@ package com.example.mycity.ui
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -53,17 +54,8 @@ fun DetailsScreen(
                 )
         ) {
             Box {
-                Box {
-                    Image(
-                        painter = painterResource(selectedRecommendation.imageResourceId),
-                        contentDescription = null,
-                        alignment = Alignment.TopCenter,
-                        contentScale = ContentScale.FillWidth
-                    )
-                }
                 Column(
                     Modifier
-                        .align(Alignment.BottomStart)
                         .fillMaxWidth()
                         .background(
                             Brush.verticalGradient(
@@ -71,16 +63,26 @@ fun DetailsScreen(
                                 0f,
                                 400f
                             )
-                        )
+                        ),
+                    verticalArrangement = Arrangement.Bottom,
+                    horizontalAlignment = Alignment.End
                 ) {
-                    Text(
-                        text = stringResource(selectedRecommendation.detailsId),
-                        style = MaterialTheme.typography.bodyMedium,
-                        modifier = Modifier.padding(
-                            vertical = dimensionResource(R.dimen.padding_detail_content_vertical),
-                            horizontal = dimensionResource(R.dimen.padding_detail_content_horizontal)
+                    Box {
+                        Image(
+                            painter = painterResource(selectedRecommendation.imageResourceId),
+                            contentDescription = null,
+                            alignment = Alignment.TopCenter,
+                            contentScale = ContentScale.FillWidth
                         )
-                    )
+                        Text(
+                            text = stringResource(selectedRecommendation.detailsId),
+                            style = MaterialTheme.typography.bodyMedium,
+                            modifier = Modifier.padding(
+                                vertical = dimensionResource(R.dimen.padding_detail_content_vertical),
+                                horizontal = dimensionResource(R.dimen.padding_detail_content_horizontal)
+                            )
+                        )
+                    }
                 }
             }
         }

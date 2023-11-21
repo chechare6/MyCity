@@ -1,6 +1,5 @@
 package com.example.mycity.ui
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.mycity.data.ActivitiesDataProvider
 import com.example.mycity.data.RecommendationDataProvider

@@ -25,6 +25,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.collectAsState
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.mycity.R
@@ -35,7 +37,7 @@ enum class MyCityScreens(@StringRes val title: Int) {
     Recommendations (title = R.string.recommendations),
     Details (title = R.string.details)
 }
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun MyCityApp(
     windowSize: WindowWidthSizeClass
@@ -56,19 +58,57 @@ fun MyCityApp(
     
     Scaffold (
         topBar = {
-            MyCityApp(
-                currentScreen = /* TODO() */,
+            MyCityAppBar(
+                currentScreen = currentScreen.title,
                 canGoBack = navController.previousBackStackEntry != null,
-                navigateNext = {navController.navigateUp()}
+                navigateNext = { navController.navigateUp() }
             )
         }
     ) { innerPadding ->
         val uiStateActivities by viewModel.uiActivitiesState.collectAsState()
-        val uiStateRecomendation by viewModel.uiRecommendationState.collectAsState()
+        val uiStateRecommendation by viewModel.uiRecommendationState.collectAsState()
 
-        if(contentType == MyCityContenType.ListsAndDetail){
-            MyCityListAndDetail(uiStateCategorias, uiStateRecomendaciones, viewModel, innerPadding, modifier = Modifier.fillMaxWidth())
+        if(contentType == MyCityContentType.ListAndDetails){
+            MyCityListAndDetail(uiStateActivities, uiStateRecommendation, viewModel, innerPadding, modifier = Modifier.fillMaxWidth())
+        } else {
+            NavHost(
+                navController = navController,
+                startDestination = MyCityScreens.Activities.name
+            ) {
+                composable(route = MyCityScreens.Activities.name) {
+                    ActivitiesScreen(
+                        activities = uiStateActivities.activitiesList,
+                        onClick = {
+                            viewModel.updateCurrentActivity(it)
+                            viewModel.updateRecommendationList(it.titleResourceId)
+                            navController.navigate(MyCityScreens.Recommendations.name)
+                        },
+                        modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.padding_medium)),
+                        contentPadding = innerPadding
+                        )
+                }
 
+                composable(route = MyCityScreens.Recommendations.name) {
+                    RecommendationScreen(
+                        recommendations = uiStateRecommendation.recommendationsList,
+                        onClick = {
+                                  viewModel.updateCurrentRecommendation(it)
+                            navController.navigate(MyCityScreens.Details.name)
+                        },
+                        modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.padding_medium)),
+                        contentPadding = innerPadding
+                    )
+                }
+                composable(MyCityScreens.Details.name) {
+                    DetailsScreen(
+                        selectedRecommendation = uiStateRecommendation.currentRecommendation,
+                        onBackPressed = {
+                                        navController.navigate(MyCityScreens.Recommendations.name)
+                        },
+                        contentPadding = innerPadding
+                    )
+                }
+            }
         }
 
     }
